@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Flower from './components/Flower';
 import Modal from './components/Modal';
 import Celebration from './components/Celebration';
@@ -9,6 +9,7 @@ function App() {
   const [clickedPetals, setClickedPetals] = useState([]);
   const [activePetal, setActivePetal] = useState(null);
   const [showCelebration, setShowCelebration] = useState(false);
+  const [isZooming, setIsZooming] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [entered, setEntered] = useState(false);
   const audioRef = useRef(null);
@@ -22,7 +23,6 @@ function App() {
   };
 
   const handlePetalClick = (index) => {
-    // Ilk tiklamada muzigi baslat (tarayicilar otomatik oynatmaya izin vermedigi icin)
     if (!isPlaying && audioRef.current) {
       audioRef.current.play().catch(err => console.log("Muzik baslatilamadi:", err));
       setIsPlaying(true);
@@ -40,13 +40,15 @@ function App() {
 
   const handleCenterClick = () => {
     if (clickedPetals.length === PETALS_COUNT) {
-      setShowCelebration(true);
+      setIsZooming(true);
+      setTimeout(() => {
+        setShowCelebration(true);
+      }, 1400); // Wait for spin-zoom animation to finish
     }
   };
 
   const allPetalsClicked = clickedPetals.length === PETALS_COUNT;
 
-  // Placeholder texts for the petals
   const petalMessages = [
     "Bana her zaman güvendiğin için teşekkür ederim.",
     "Şefkatinle dünyamı aydınlatıyorsun.",
@@ -82,12 +84,11 @@ function App() {
       <div className="absolute bottom-[-20%] left-[20%] w-64 md:w-96 h-64 md:h-96 bg-rose-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"></div>
 
       <div className={`z-10 flex flex-col items-center w-full max-w-md mx-auto transition-opacity duration-1000 ${entered ? 'opacity-100' : 'opacity-0'}`}>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-8 md:mb-12 drop-shadow-sm text-center">
+        <h1 className={`text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-8 md:mb-12 drop-shadow-sm text-center transition-opacity duration-500 ${isZooming ? 'opacity-0' : 'opacity-100'}`}>
           Canım Annem
         </h1>
 
-        {/* Flower Container with relative positioning for bubbles */}
-        <div className="relative w-full max-w-[280px] sm:max-w-[340px] aspect-square flex justify-center items-center">
+        <div className={`relative w-full max-w-[280px] sm:max-w-[340px] aspect-square flex justify-center items-center transition-all ${isZooming ? 'animate-spin-zoom z-50' : ''}`}>
           
           {/* Initial Bubble pointing to the top petal */}
           {clickedPetals.length === 0 && (
@@ -100,7 +101,16 @@ function App() {
             </div>
           )}
 
-          {/* Bitis baloncuğu kaldirildi (sondaki baloncugu sil istegi) */}
+          {/* Final Bubble pointing to the center */}
+          {allPetalsClicked && !isZooming && (
+            <div className="absolute top-[30%] sm:top-[35%] right-[-40px] sm:-right-8 z-20">
+              <div className="relative bg-gradient-to-r from-yellow-50 to-yellow-100 text-yellow-800 px-4 py-2 rounded-2xl shadow-xl border border-yellow-300 text-sm font-bold max-w-[140px] text-center">
+                Tümünü okudun!<br/>Şimdi kalbime dokun.
+                {/* Speech tail */}
+                <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-4 h-4 bg-yellow-50 border-b border-l border-yellow-300 transform rotate-45"></div>
+              </div>
+            </div>
+          )}
 
           <Flower 
             clickedPetals={clickedPetals} 
@@ -120,7 +130,6 @@ function App() {
 
       {showCelebration && <Celebration />}
 
-      {/* Arka plan muzigi */}
       <audio ref={audioRef} loop>
         <source src="/Sertab Erener - Bir Tek Annem Olsun  Anneler Günü.mp3" type="audio/mpeg" />
       </audio>

@@ -3,10 +3,23 @@
 @theme {
   --animate-flower-grow: grow 2s ease-out forwards;
   --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-zoom: spin-zoom 1.5s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+  --animate-fade-in: fade-in 1s ease-out forwards;
 
   @keyframes grow {
     0% { transform: scale(0); }
     100% { transform: scale(1); }
+  }
+
+  @keyframes spin-zoom {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    30% { transform: scale(0.8) rotate(-45deg); opacity: 1; }
+    100% { transform: scale(30) rotate(1080deg); opacity: 0; }
+  }
+
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 }
 
