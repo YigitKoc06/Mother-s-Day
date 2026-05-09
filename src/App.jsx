@@ -64,7 +64,7 @@ function App() {
           
           {/* Initial Bubble pointing to the top petal */}
           {clickedPetals.length === 0 && (
-            <div className="absolute -top-10 sm:-top-8 right-[-10px] z-20 animate-[bounce_2s_infinite]">
+            <div className="absolute -top-10 sm:-top-8 right-[-10px] z-20">
               <div className="relative bg-white text-pink-600 px-4 py-2 rounded-2xl shadow-xl border border-pink-100 text-sm font-semibold max-w-[130px] text-center">
                 Okumak için yapraklara tıkla!
                 {/* Speech tail */}
@@ -95,7 +95,7 @@ function App() {
 
       {/* Arka plan muzigi */}
       <audio ref={audioRef} loop>
-        <source src="https://freepd.com/music/A%20Careless%20Trifle.mp3" type="audio/mpeg" />
+        <source src="/music.mp3" type="audio/mpeg" />
       </audio>
     </div>
   );
