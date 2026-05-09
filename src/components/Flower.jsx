@@ -56,10 +56,13 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
               key={`petal-${i}`} 
               transform={`rotate(${rotation} 200 200)`}
               onClick={() => onPetalClick(i)}
-              className="cursor-pointer transition-opacity duration-700 ease-in-out hover:brightness-110"
-              style={{ opacity: isClicked ? 0.15 : 1 }}
+              className="cursor-pointer transition-all duration-700 ease-in-out hover:brightness-110 hover:drop-shadow-2xl"
+              style={{ 
+                opacity: isClicked ? 0.5 : 1,
+                filter: isClicked ? 'saturate(60%) brightness(85%)' : 'none'
+              }}
             >
-              {/* Gerçekçi Yaprak Gövdesi - Attığınız resimdeki gibi uçları dalgalı ve ortası hafif çentikli */}
+              {/* Gerçekçi Yaprak Gövdesi - Sınır çizgisi eklendi */}
               <path
                 d="M 200 200 
                    C 140 130, 90 70, 130 20 
@@ -67,7 +70,9 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
                    C 220 20, 240 0, 270 20 
                    C 310 70, 260 130, 200 200 Z"
                 fill="url(#petalGradient)"
-                className="drop-shadow-lg"
+                stroke="#fda4af"
+                strokeWidth="2"
+                className="drop-shadow-xl"
               />
               
               {/* Gerçekçi İnce Damarlar */}

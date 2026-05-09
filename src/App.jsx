@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Flower from './components/Flower';
 import Modal from './components/Modal';
 import Celebration from './components/Celebration';
@@ -13,6 +13,12 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [entered, setEntered] = useState(false);
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3; // Sesi %30 seviyesine düşür
+    }
+  }, []);
 
   const handleEnter = () => {
     setEntered(true);
