@@ -52,24 +52,29 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
           );
         })}
 
-        {/* Center */}
-        <circle 
-          cx="200" 
-          cy="200" 
-          r="45" 
-          fill="url(#centerGradient)" 
-          stroke="#fef08a"
-          strokeWidth="4"
-          className={`transition-all duration-300 ${allPetalsClicked ? 'cursor-pointer animate-pulse-fast shadow-inner hover:scale-110 origin-center' : ''}`}
+        {/* Center Group */}
+        <g 
+          className={`transition-all duration-300 ${allPetalsClicked ? 'cursor-pointer animate-pulse-fast hover:scale-110 origin-center' : ''}`}
           style={{ transformOrigin: '200px 200px' }}
           onClick={() => {
             if (allPetalsClicked) onCenterClick();
           }}
-        />
-        
-        {/* Decorative inner details for the center */}
-        <circle cx="200" cy="200" r="30" fill="none" stroke="#ca8a04" strokeWidth="2" strokeDasharray="4 4" className="opacity-50" />
-        <circle cx="200" cy="200" r="15" fill="#ca8a04" className="opacity-40" />
+        >
+          {/* Main Center Background */}
+          <circle 
+            cx="200" 
+            cy="200" 
+            r="45" 
+            fill="url(#centerGradient)" 
+            stroke="#fef08a"
+            strokeWidth="4"
+            className={allPetalsClicked ? 'shadow-inner' : ''}
+          />
+          
+          {/* Decorative inner details for the center */}
+          <circle cx="200" cy="200" r="30" fill="none" stroke="#ca8a04" strokeWidth="2" strokeDasharray="4 4" className="opacity-50" style={{ pointerEvents: 'none' }} />
+          <circle cx="200" cy="200" r="15" fill="#ca8a04" className="opacity-40" style={{ pointerEvents: 'none' }} />
+        </g>
 
         {/* Gradients */}
         <defs>
