@@ -38,7 +38,7 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
               style={{ opacity: isClicked ? 0.15 : 1 }}
             >
               <path
-                d="M 200 200 Q 110 100 200 10 Q 290 100 200 200 Z"
+                d="M 200 200 C 110 110, 140 15, 200 15 C 260 15, 290 110, 200 200 Z"
                 fill="url(#outerPetal)"
                 className="drop-shadow-lg"
               />
@@ -58,9 +58,9 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
               className="cursor-pointer transition-opacity duration-700 ease-in-out hover:brightness-110"
               style={{ opacity: isClicked ? 0.2 : 1 }}
             >
-              {/* İç yaprak gövdesi */}
+              {/* İç yaprak gövdesi - Daha yumuşak/yuvarlak uçlu */}
               <path
-                d="M 200 200 Q 140 110 200 25 Q 260 110 200 200 Z"
+                d="M 200 200 C 140 120, 160 30, 200 30 C 240 30, 260 120, 200 200 Z"
                 fill="url(#innerPetal)"
                 stroke="#fda4af"
                 strokeWidth="1.5"
@@ -68,7 +68,7 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
               />
               {/* Yaprak damarı */}
               <path 
-                d="M 200 200 L 200 40"
+                d="M 200 200 L 200 45"
                 fill="none"
                 stroke="#fecdd3"
                 strokeWidth="2"
