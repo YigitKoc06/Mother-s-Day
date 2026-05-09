@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Flower from './components/Flower';
 import Modal from './components/Modal';
 import Celebration from './components/Celebration';
@@ -11,6 +11,20 @@ function App() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
+
+  // Otomatik oynatmayi dene
+  useEffect(() => {
+    if (audioRef.current && !isPlaying) {
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          setIsPlaying(true);
+        }).catch(err => {
+          console.log("Tarayıcı otomatik oynatmayı engelledi, ilk tıklamada çalacak:", err);
+        });
+      }
+    }
+  }, []);
 
   const handlePetalClick = (index) => {
     // Ilk tiklamada muzigi baslat (tarayicilar otomatik oynatmaya izin vermedigi icin)
@@ -94,7 +108,7 @@ function App() {
       {showCelebration && <Celebration />}
 
       {/* Arka plan muzigi */}
-      <audio ref={audioRef} loop>
+      <audio ref={audioRef} autoPlay loop>
         <source src="/Sertab Erener - Bir Tek Annem Olsun  Anneler Günü.mp3" type="audio/mpeg" />
       </audio>
     </div>
