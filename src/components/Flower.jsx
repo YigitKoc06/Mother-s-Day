@@ -10,7 +10,7 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
   const petals = Array.from({ length: 6 });
 
   return (
-    <div className={`relative w-full max-w-[320px] sm:max-w-[400px] aspect-square transition-all duration-1000 ease-out transform ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
+    <div className={`relative w-full h-full transition-all duration-1000 ease-out transform ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
       <svg 
         width="100%" 
         height="100%" 
