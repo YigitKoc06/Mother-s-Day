@@ -7,7 +7,7 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
     setMounted(true);
   }, []);
 
-  const petals = Array.from({ length: 6 });
+  const indices = [0, 1, 2, 3, 4, 5];
 
   return (
     <div className={`relative w-full h-full transition-all duration-1000 ease-out transform ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
@@ -26,70 +26,61 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
           />
         )}
 
-        {/* Back Layer Petals (Daha koyu, geniş ve gösterişli arka yapraklar) */}
-        {petals.map((_, i) => {
-          const rotation = i * 60;
+        {/* 1. Arka Katman (Background Petals) - 30 derece kaydırılmış, daha geniş */}
+        {indices.map((i) => {
+          const rotation = i * 60 + 30;
           const isClicked = clickedPetals.includes(i);
           return (
             <g 
-              key={`back-${i}`} 
+              key={`bg-${i}`} 
               transform={`rotate(${rotation} 200 200)`}
-              onClick={() => onPetalClick(i)}
-              className="cursor-pointer transition-all duration-1000 ease-in-out origin-center hover:scale-105"
-              style={{ 
-                opacity: isClicked ? 0.15 : 1,
-                transformOrigin: '200px 200px'
-              }}
+              className="transition-opacity duration-1000 ease-in-out"
+              style={{ opacity: isClicked ? 0.15 : 1 }}
             >
               <path
-                d="M 200 200 C 120 140, 130 10, 200 5 C 270 10, 280 140, 200 200 Z"
+                d="M 200 200 Q 110 100 200 10 Q 290 100 200 200 Z"
                 fill="url(#outerPetal)"
-                transform="rotate(30 200 200)"
-                className="drop-shadow-xl"
+                className="drop-shadow-lg"
               />
             </g>
           );
         })}
 
-        {/* Front Layer Petals (Ana yapraklar, zarif ve ince hatlı) */}
-        {petals.map((_, i) => {
+        {/* 2. Ön Katman (Foreground Petals) - Etkileşimli, daha ince */}
+        {indices.map((i) => {
           const rotation = i * 60;
           const isClicked = clickedPetals.includes(i);
           return (
             <g 
-              key={`front-${i}`} 
+              key={`fg-${i}`} 
               transform={`rotate(${rotation} 200 200)`}
               onClick={() => onPetalClick(i)}
-              className="cursor-pointer transition-all duration-700 ease-in-out hover:scale-110 origin-center"
-              style={{ 
-                opacity: isClicked ? 0.2 : 1,
-                transformOrigin: '200px 200px'
-              }}
+              className="cursor-pointer transition-opacity duration-700 ease-in-out hover:brightness-110"
+              style={{ opacity: isClicked ? 0.2 : 1 }}
             >
               {/* İç yaprak gövdesi */}
               <path
-                d="M 200 200 C 150 120, 155 30, 200 20 C 245 30, 250 120, 200 200 Z"
+                d="M 200 200 Q 140 110 200 25 Q 260 110 200 200 Z"
                 fill="url(#innerPetal)"
                 stroke="#fda4af"
                 strokeWidth="1.5"
-                className="drop-shadow-2xl"
+                className="drop-shadow-xl"
               />
-              {/* Yaprak damarı / zarafet çizgisi */}
+              {/* Yaprak damarı */}
               <path 
-                d="M 200 200 Q 195 100 200 30"
+                d="M 200 200 L 200 40"
                 fill="none"
                 stroke="#fecdd3"
-                strokeWidth="1.5"
-                className="opacity-60"
+                strokeWidth="2"
+                className="opacity-50"
               />
             </g>
           );
         })}
 
-        {/* Center Group (Göbek kısmı) */}
+        {/* 3. Göbek Kısmı (Center Group) */}
         <g 
-          className={`transition-all duration-300 ${allPetalsClicked ? 'cursor-pointer animate-[pulse_1s_infinite] hover:scale-110 origin-center' : ''}`}
-          style={{ transformOrigin: '200px 200px' }}
+          className={`transition-all duration-300 ${allPetalsClicked ? 'cursor-pointer animate-[pulse_1s_infinite]' : ''}`}
           onClick={() => {
             if (allPetalsClicked) onCenterClick();
           }}
@@ -98,18 +89,17 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
           <circle 
             cx="200" 
             cy="200" 
-            r="48" 
+            r="45" 
             fill="url(#centerGradient)" 
             stroke="#fcd34d"
             strokeWidth="3"
-            className={allPetalsClicked ? 'shadow-inner' : 'drop-shadow-2xl'}
+            className={allPetalsClicked ? 'shadow-inner' : 'drop-shadow-xl'}
           />
           
-          {/* Göbek içindeki estetik detaylar (çiçek tohumları/polenleri gibi) */}
-          <circle cx="200" cy="200" r="36" fill="none" stroke="#b45309" strokeWidth="4" strokeDasharray="6 5" className="opacity-80" style={{ pointerEvents: 'none' }} />
-          <circle cx="200" cy="200" r="26" fill="none" stroke="#fef08a" strokeWidth="2" strokeDasharray="3 4" className="opacity-90" style={{ pointerEvents: 'none' }} />
-          <circle cx="200" cy="200" r="14" fill="#78350f" className="opacity-95" style={{ pointerEvents: 'none' }} />
-          <circle cx="200" cy="200" r="6" fill="#fcd34d" className="opacity-80" style={{ pointerEvents: 'none' }} />
+          {/* İç detaylar */}
+          <circle cx="200" cy="200" r="32" fill="none" stroke="#b45309" strokeWidth="3" strokeDasharray="5 5" className="opacity-80" pointerEvents="none" />
+          <circle cx="200" cy="200" r="20" fill="none" stroke="#fef08a" strokeWidth="2" strokeDasharray="3 3" className="opacity-90" pointerEvents="none" />
+          <circle cx="200" cy="200" r="10" fill="#78350f" className="opacity-95" pointerEvents="none" />
         </g>
 
         {/* Renk Geçişleri (Gradients) */}
