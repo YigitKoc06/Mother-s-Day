@@ -47,7 +47,29 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
           </radialGradient>
         </defs>
 
-        {/* Yapraklar (Sakura/Kiraz Çiçeği Formu) */}
+        {/* Arka Plan Yaprakları (Daha az belirgin, derinlik katan katman) */}
+        {indices.map((i) => {
+          const rotation = i * 60 + 30; // Boşlukları doldurması için 30 derece kaydırılmış
+          return (
+            <g 
+              key={`bg-petal-${i}`} 
+              transform={`rotate(${rotation} 200 200)`}
+              style={{ pointerEvents: 'none' }}
+              className="opacity-60 blur-[1px] brightness-75"
+            >
+              <path
+                d="M 200 200 
+                   C 140 130, 90 70, 130 20 
+                   C 160 0, 180 20, 200 35 
+                   C 220 20, 240 0, 270 20 
+                   C 310 70, 260 130, 200 200 Z"
+                fill="url(#petalGradient)"
+              />
+            </g>
+          );
+        })}
+
+        {/* Ana Yapraklar (Sakura/Kiraz Çiçeği Formu) */}
         {indices.map((i) => {
           const rotation = i * 60;
           const isClicked = clickedPetals.includes(i);
