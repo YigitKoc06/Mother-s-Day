@@ -56,12 +56,12 @@ function App() {
   const allPetalsClicked = clickedPetals.length === PETALS_COUNT;
 
   const petalMessages = [
-    "Bana her zaman güvendiğin için teşekkür ederim.",
-    "Şefkatinle dünyamı aydınlatıyorsun.",
-    "Senin sevgin en büyük gücüm.",
-    "Her zorlukta yanımda olduğun için minnettarım.",
-    "Gülüşün kalbimi ısıtıyor.",
-    "Sen dünyanın en mükemmel annesisin."
+    "Güzelliğinle tebessüm saçıyorsun.",
+    "Şefkatinle evladına yol gösteriyorsun.",
+    "Her başarımı benimle kutluyorsun.",
+    "Gülüşünle dünyaya renk katıyorsun.",
+    "Ailemize sevgi veriyorsun.",
+    "Hayat yoldaşına aşk katıyorsun."
   ];
 
   return (

@@ -16,8 +16,8 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
 
   if (!isOpen) return null;
 
-  // Use picsum photos with a seed based on the petal index to get a consistent image
-  const imageUrl = `https://picsum.photos/seed/${petalIndex + 100}/600/400`;
+  // Fotoğrafı yerel 'public/photos' klasöründen alır (1.jpg, 2.jpg... şeklinde)
+  const imageUrl = `/photos/${petalIndex + 1}.jpg`;
 
   return (
     <div 
@@ -40,8 +40,12 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
         <div className="w-full h-56 bg-slate-100 relative">
           <img 
             src={imageUrl} 
-            alt="Placeholder for mother's day" 
+            alt="Anı Fotoğrafı" 
             className="w-full h-full object-cover"
+            onError={(e) => {
+              // Eğer fotoğraf henüz eklenmemişse internetten rastgele resim gösterir (site bozuk durmasın diye)
+              e.target.src = `https://picsum.photos/seed/${petalIndex + 100}/600/400`;
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </div>
