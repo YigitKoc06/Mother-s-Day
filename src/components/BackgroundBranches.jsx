@@ -1,13 +1,12 @@
 import React from 'react';
 
-const BranchItem = ({ className, delay }) => (
+const BranchItem = ({ style }) => (
   <svg 
     viewBox="0 0 200 200" 
-    className={`absolute pointer-events-none opacity-50 animate-fade-in ${className}`} 
+    className="absolute pointer-events-none opacity-60" 
     style={{ 
       width: 'clamp(180px, 35vw, 350px)',
-      animationDelay: delay,
-      animationFillMode: 'both'
+      ...style
     }}
   >
     {/* Ana Dal ve Yan Dallar */}
@@ -43,16 +42,16 @@ const BackgroundBranches = ({ isZooming }) => {
     <div className={`absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-1000 ${isZooming ? 'opacity-0' : 'opacity-100'}`}>
       
       {/* Sol Üst Köşe */}
-      <BranchItem className="top-[-20px] left-[-20px] origin-top-left" delay="0s" />
+      <BranchItem style={{ top: '-5%', left: '-5%' }} />
       
-      {/* Sağ Üst Köşe (Simetrik ve Döndürülmüş) */}
-      <BranchItem className="top-[-40px] right-[-20px] origin-top-right transform -scale-x-100 rotate-12" delay="0.4s" />
+      {/* Sağ Üst Köşe */}
+      <BranchItem style={{ top: '-5%', right: '-5%', transform: 'scaleX(-1)' }} />
       
       {/* Sol Alt Köşe */}
-      <BranchItem className="bottom-[-20px] left-[-20px] origin-bottom-left transform -scale-y-100 -rotate-12" delay="0.8s" />
+      <BranchItem style={{ bottom: '-5%', left: '-5%', transform: 'scaleY(-1)' }} />
       
       {/* Sağ Alt Köşe */}
-      <BranchItem className="bottom-[-40px] right-[-20px] origin-bottom-right transform -scale-x-100 -scale-y-100 rotate-45" delay="1.2s" />
+      <BranchItem style={{ bottom: '-5%', right: '-5%', transform: 'scale(-1, -1)' }} />
       
     </div>
   );
