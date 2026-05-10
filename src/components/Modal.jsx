@@ -26,7 +26,7 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-[grow_0.3s_ease-out_forwards]"
+        className="relative w-full max-w-xl max-h-[90dvh] flex flex-col bg-white rounded-3xl shadow-2xl overflow-hidden animate-[grow_0.3s_ease-out_forwards]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -38,7 +38,7 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
         </button>
 
         {/* Image Placeholder */}
-        <div className="w-full h-80 sm:h-[28rem] relative flex items-center justify-center overflow-hidden bg-slate-900">
+        <div className="w-full h-64 sm:h-80 md:h-[28rem] shrink-0 relative flex items-center justify-center overflow-hidden bg-slate-900">
           {/* Arka planda fotoğrafın bulanık hali (kenarlarda siyahlık kalmasın diye) */}
           <img 
             src={imageUrl} 
@@ -60,14 +60,14 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
         </div>
 
         {/* Content */}
-        <div className="relative z-20 px-8 pb-8 pt-2 text-center bg-white">
-          <p className="text-2xl md:text-3xl font-serif text-slate-800 leading-relaxed italic">
+        <div className="relative z-20 px-6 sm:px-8 pb-6 sm:pb-8 pt-2 text-center bg-white overflow-y-auto flex-1">
+          <p className="text-xl sm:text-2xl md:text-3xl font-serif text-slate-800 leading-relaxed italic">
             "{message}"
           </p>
           
           <button 
             onClick={onClose}
-            className="mt-8 px-10 py-3 bg-gradient-to-r from-pink-500 to-rose-400 text-white text-lg font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all active:scale-95"
+            className="mt-6 sm:mt-8 px-10 py-3 bg-gradient-to-r from-pink-500 to-rose-400 text-white text-lg font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all active:scale-95"
           >
             Kapat
           </button>

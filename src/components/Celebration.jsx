@@ -42,11 +42,11 @@ const Celebration = () => {
       ))}
 
       {/* Yazılar - Daha yumuşak bir beliriş */}
-      <div className="relative z-10 flex flex-col items-center justify-center opacity-0 animate-fade-in-slow">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-center text-transparent bg-clip-text bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 drop-shadow-xl tracking-tight leading-tight">
+      <div className="relative z-10 flex flex-col items-center justify-center opacity-0 animate-fade-in-slow px-4">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-center text-transparent bg-clip-text bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 drop-shadow-xl tracking-tight leading-tight">
           Anneler Günün<br/>Kutlu Olsun!
         </h1>
-        <p className="mt-8 text-center text-2xl md:text-3xl text-pink-700 font-bold drop-shadow-sm animate-pulse-fast">
+        <p className="mt-6 sm:mt-8 text-center text-xl sm:text-2xl md:text-3xl text-pink-700 font-bold drop-shadow-sm animate-pulse-fast">
           Seni çok seviyorum ❤️
         </p>
       </div>
