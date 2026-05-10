@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Flower from './components/Flower';
 import Modal from './components/Modal';
 import Celebration from './components/Celebration';
+import BackgroundBranches from './components/BackgroundBranches';
 
 const PETALS_COUNT = 6;
 
@@ -67,6 +68,9 @@ function App() {
   return (
     <div className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-pink-200 via-purple-200 to-rose-200 p-4">
       
+      {/* Arka plan dalları ve minik çiçekler */}
+      {entered && <BackgroundBranches isZooming={isZooming} />}
+
       {/* Enter Screen Overlay */}
       {!entered && (
         <div 
