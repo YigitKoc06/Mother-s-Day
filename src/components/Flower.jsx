@@ -26,7 +26,7 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
         width="100%" 
         height="100%" 
         viewBox="0 0 400 400" 
-        className="overflow-visible drop-shadow-2xl"
+        className="overflow-visible drop-shadow-md"
       >
         {/* Tüm yapraklar tıklandığında beliren parlaklık */}
         {allPetalsClicked && (
@@ -94,7 +94,6 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
                 fill="url(#petalGradient)"
                 stroke="#fda4af"
                 strokeWidth="2"
-                className="drop-shadow-xl"
               />
               
               {/* Gerçekçi İnce Damarlar */}
