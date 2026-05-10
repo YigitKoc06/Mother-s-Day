@@ -26,40 +26,48 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden animate-[grow_0.3s_ease-out_forwards]"
+        className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-[grow_0.3s_ease-out_forwards]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white/50 hover:bg-white/90 backdrop-blur-md rounded-full text-slate-800 transition-colors"
+          className="absolute top-4 right-4 z-20 p-2 bg-black/30 hover:bg-black/50 text-white backdrop-blur-md rounded-full transition-colors"
         >
           <X size={20} />
         </button>
 
         {/* Image Placeholder */}
-        <div className="w-full h-56 bg-slate-100 relative">
+        <div className="w-full h-80 sm:h-[28rem] relative flex items-center justify-center overflow-hidden bg-slate-900">
+          {/* Arka planda fotoğrafın bulanık hali (kenarlarda siyahlık kalmasın diye) */}
+          <img 
+            src={imageUrl} 
+            className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110 pointer-events-none"
+            alt=""
+          />
+          {/* Asıl Fotoğraf (Kırpılmasını engellemek için object-contain) */}
           <img 
             src={imageUrl} 
             alt="Anı Fotoğrafı" 
-            className="w-full h-full object-cover"
+            className="relative z-10 w-full h-full object-contain"
             onError={(e) => {
               // Eğer fotoğraf henüz eklenmemişse internetten rastgele resim gösterir (site bozuk durmasın diye)
               e.target.src = `https://picsum.photos/seed/${petalIndex + 100}/600/400`;
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          {/* Yazı kısmına yumuşak geçiş efekti */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none"></div>
         </div>
 
         {/* Content */}
-        <div className="p-8 text-center bg-gradient-to-b from-white to-pink-50">
-          <p className="text-xl md:text-2xl font-serif text-slate-800 leading-relaxed italic">
+        <div className="relative z-20 px-8 pb-8 pt-2 text-center bg-white">
+          <p className="text-2xl md:text-3xl font-serif text-slate-800 leading-relaxed italic">
             "{message}"
           </p>
           
           <button 
             onClick={onClose}
-            className="mt-8 px-8 py-3 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all active:scale-95"
+            className="mt-8 px-10 py-3 bg-gradient-to-r from-pink-500 to-rose-400 text-white text-lg font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all active:scale-95"
           >
             Kapat
           </button>
