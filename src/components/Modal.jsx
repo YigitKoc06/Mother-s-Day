@@ -16,8 +16,9 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
 
   if (!isOpen) return null;
 
-  // Fotoğrafı yerel 'public/photos' klasöründen alır (1.jpg, 2.jpg... şeklinde)
-  const imageUrl = `/photos/${petalIndex + 1}.jpg`;
+  // Kullanıcının kaydettiği tam dosya adları (iki noktalı ve farklı uzantılı olduğu için özel olarak eşleştirildi)
+  const photoNames = ['1..png', '2..jpeg', '3..jpeg', '4..jpeg', '5..jpeg', '6..jpeg'];
+  const imageUrl = `/photos/${photoNames[petalIndex]}`;
 
   return (
     <div 
