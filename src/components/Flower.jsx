@@ -55,7 +55,7 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
               key={`bg-petal-${i}`} 
               transform={`translate(200, 200) rotate(${rotation}) scale(1.18) translate(-200, -200)`}
               style={{ pointerEvents: 'none' }}
-              className="opacity-40 blur-[1px] brightness-50"
+              className="opacity-25 brightness-50"
             >
               <path
                 d="M 200 200 
@@ -78,10 +78,10 @@ const Flower = ({ clickedPetals, onPetalClick, onCenterClick, allPetalsClicked }
               key={`petal-${i}`} 
               transform={`rotate(${rotation} 200 200)`}
               onClick={() => onPetalClick(i)}
-              className="cursor-pointer transition-all duration-700 ease-in-out hover:brightness-110 hover:drop-shadow-2xl"
+              className="cursor-pointer transition-all duration-700 ease-in-out hover:brightness-110"
               style={{ 
                 opacity: isClicked ? 1 : 0.6,
-                filter: isClicked ? 'none' : 'grayscale(60%) brightness(70%) saturate(60%)'
+                filter: isClicked ? 'none' : 'saturate(50%) brightness(75%)'
               }}
             >
               {/* Gerçekçi Yaprak Gövdesi - Sınır çizgisi eklendi */}

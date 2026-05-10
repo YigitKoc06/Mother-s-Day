@@ -38,11 +38,11 @@ const Modal = ({ isOpen, onClose, message, petalIndex }) => {
         </button>
 
         {/* Image Placeholder */}
-        <div className="w-full h-64 sm:h-80 md:h-[28rem] shrink-0 relative flex items-center justify-center overflow-hidden bg-slate-900">
-          {/* Arka planda fotoğrafın bulanık hali (kenarlarda siyahlık kalmasın diye) */}
+        <div className="w-full h-64 sm:h-80 md:h-[28rem] shrink-0 relative flex items-center justify-center overflow-hidden bg-slate-900 sm:bg-slate-800">
+          {/* Arka planda fotoğrafın bulanık hali (sadece mobilden büyük ekranlarda aktif) */}
           <img 
             src={imageUrl} 
-            className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110 pointer-events-none"
+            className="hidden sm:block absolute inset-0 w-full h-full object-cover blur-xl opacity-30 scale-110 pointer-events-none"
             alt=""
           />
           {/* Asıl Fotoğraf (Kırpılmasını engellemek için object-contain) */}
